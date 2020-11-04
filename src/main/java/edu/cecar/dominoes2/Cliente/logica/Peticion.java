@@ -69,7 +69,7 @@ public class Peticion {
             System.out.println(mensajeRespuesta[0] + " " + mensajeRespuesta[1]);
             JOptionPane.showMessageDialog(null, mensajeRespuesta[1]);
             if (mensajeRespuesta[0].equals("1")) {
-                usuario.setText("Nombre jugador: "+nombre);
+                usuario.setText("Nombre jugador: " + nombre);
                 usuario.revalidate();
                 usuario.repaint();
 
@@ -229,13 +229,17 @@ public class Peticion {
         mandarMensaje("paso");
         controlTurno = true;
     }
-    public void puntos(JTextArea area){
+
+    public void puntos(JTextArea area) {
+
         String[] mensaje = recibirMensaje().split("@");
-        area.setText("");
-        for (String datos : mensaje) {
-            String[] datosSeparados = datos.split(";");
-            
-            area.append("Jugador-> "+datosSeparados[0]+" G: "+datosSeparados[1]+ " P: "+datosSeparados[2]+" \n");
+        if (mensaje.length > 2) {
+            area.setText("");
+            for (String datos : mensaje) {
+                String[] datosSeparados = datos.split(";");
+
+                area.append("Jugador-> " + datosSeparados[0] + " G: " + datosSeparados[1] + " P: " + datosSeparados[2] + " \n");
+            }
         }
     }
 

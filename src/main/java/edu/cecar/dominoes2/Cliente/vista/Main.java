@@ -248,7 +248,7 @@ public class Main extends javax.swing.JFrame {
         while (true) {
 
             try {
-                peticion = new Peticion(new Socket("127.0.0.1", 2020), jpMesa);
+                peticion = new Peticion(new Socket("192.168.1.29", 2020), jpMesa);
                 break;
             } catch (IOException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
