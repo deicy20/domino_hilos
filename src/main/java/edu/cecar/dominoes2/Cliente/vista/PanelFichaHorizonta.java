@@ -47,6 +47,15 @@ public class PanelFichaHorizonta extends javax.swing.JPanel {
         
     }
 
+    
+
+    @Override
+    public String toString() {
+        return super.getName(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
     public String getIzquierda() {
         return izquierda;
     }

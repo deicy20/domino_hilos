@@ -47,7 +47,7 @@ public class Main extends javax.swing.JFrame {
         btnPaso = new javax.swing.JButton();
         btnDerecha = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jpMeza = new javax.swing.JPanel();
+        jpMesa = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jlJugador = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -129,11 +129,11 @@ public class Main extends javax.swing.JFrame {
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jpMeza.setBackground(new java.awt.Color(51, 51, 51));
-        jpMeza.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 255), 3, true)));
-        jpMeza.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jpMeza.setLayout(new javax.swing.BoxLayout(jpMeza, javax.swing.BoxLayout.LINE_AXIS));
-        jScrollPane1.setViewportView(jpMeza);
+        jpMesa.setBackground(new java.awt.Color(51, 51, 51));
+        jpMesa.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 255), 3, true)));
+        jpMesa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jpMesa.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 25));
+        jScrollPane1.setViewportView(jpMesa);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Arial", 3, 60)); // NOI18N
@@ -145,6 +145,7 @@ public class Main extends javax.swing.JFrame {
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
@@ -167,9 +168,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 561, Short.MAX_VALUE)
-                .addComponent(jlJugador)
-                .addGap(307, 307, 307))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(291, 291, 291))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
@@ -177,7 +178,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 17, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1098, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpFichas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1098, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -185,20 +186,20 @@ public class Main extends javax.swing.JFrame {
                         .addGap(363, 363, 363)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68)
-                        .addComponent(jpJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jpJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
                         .addComponent(jlJugador)))
                 .addGap(12, 12, 12)
                 .addComponent(jLabel2)
@@ -247,7 +248,7 @@ public class Main extends javax.swing.JFrame {
         while (true) {
 
             try {
-                peticion = new Peticion(new Socket("127.0.0.1", 2020));
+                peticion = new Peticion(new Socket("127.0.0.1", 2020), jpMesa);
                 break;
             } catch (IOException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -258,6 +259,7 @@ public class Main extends javax.swing.JFrame {
 
         peticion.pedirFichas(jpFichas, jpJugar);
 
+       peticion.puntos(jTextArea1);
         peticion.iniciarNotificadorTurno(frame, btnIzquierda, btnPaso, btnDerecha);
 
     }//GEN-LAST:event_formWindowOpened
@@ -266,7 +268,7 @@ public class Main extends javax.swing.JFrame {
     private void btnIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzquierdaActionPerformed
         // TODO add your handling code here:
         if (jpJugar.getComponents().length > 0) {
-            if (peticion.jugarIzquierda((PanelFichaHorizonta) jpJugar.getComponents()[0])) {
+            if (peticion.jugarIzquierda(jpFichas,(PanelFichaHorizonta) jpJugar.getComponents()[0])) {
                 btnIzquierda.setEnabled(false);
                 btnDerecha.setEnabled(false);
                 btnPaso.setEnabled(false);
@@ -281,7 +283,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jpJugar.getComponents().length > 0) {
 
-            if (peticion.jugarDerecha((PanelFichaHorizonta) jpJugar.getComponents()[0])) {
+            if (peticion.jugarDerecha(jpFichas,(PanelFichaHorizonta) jpJugar.getComponents()[0])) {
                 btnIzquierda.setEnabled(false);
                 btnDerecha.setEnabled(false);
                 btnPaso.setEnabled(false);
@@ -357,6 +359,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jlJugador;
     private javax.swing.JPanel jpFichas;
     private javax.swing.JPanel jpJugar;
-    private javax.swing.JPanel jpMeza;
+    private javax.swing.JPanel jpMesa;
     // End of variables declaration//GEN-END:variables
 }

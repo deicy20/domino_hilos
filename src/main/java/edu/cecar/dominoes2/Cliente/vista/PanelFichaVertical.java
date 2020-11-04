@@ -50,6 +50,12 @@ public class PanelFichaVertical extends javax.swing.JPanel {
         
     }
 
+
+    @Override
+    public String toString() {
+        return super.getName(); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getArriba() {
         return arriba;
     }
