@@ -248,18 +248,27 @@ public class Main extends javax.swing.JFrame {
         while (true) {
 
             try {
-                peticion = new Peticion(new Socket("192.168.1.29", 2020), jpMesa);
+                peticion = new Peticion(new Socket("127.0.0.1", 2020), jpMesa);
                 break;
             } catch (IOException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
-        while (peticion.validarNombre(jlJugador));
 
-        peticion.pedirFichas(jpFichas, jpJugar);
+        while (true) {
+            peticion.mandarMensaje(peticion.getMiTurno());
+            String resultado = peticion.recibirMensaje();
+            if(resultado.equals("si")){
+            while (peticion.validarNombre(jlJugador));
 
-       peticion.puntos(jTextArea1);
+            peticion.pedirFichas(jpFichas, jpJugar);
+
+            peticion.puntos(jTextArea1);
+            break;
+            }
+        }
+
         peticion.iniciarNotificadorTurno(frame, btnIzquierda, btnPaso, btnDerecha);
 
     }//GEN-LAST:event_formWindowOpened
@@ -268,7 +277,7 @@ public class Main extends javax.swing.JFrame {
     private void btnIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzquierdaActionPerformed
         // TODO add your handling code here:
         if (jpJugar.getComponents().length > 0) {
-            if (peticion.jugarIzquierda(jpFichas,(PanelFichaHorizonta) jpJugar.getComponents()[0])) {
+            if (peticion.jugarIzquierda(jpFichas, (PanelFichaHorizonta) jpJugar.getComponents()[0])) {
                 btnIzquierda.setEnabled(false);
                 btnDerecha.setEnabled(false);
                 btnPaso.setEnabled(false);
@@ -283,7 +292,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jpJugar.getComponents().length > 0) {
 
-            if (peticion.jugarDerecha(jpFichas,(PanelFichaHorizonta) jpJugar.getComponents()[0])) {
+            if (peticion.jugarDerecha(jpFichas, (PanelFichaHorizonta) jpJugar.getComponents()[0])) {
                 btnIzquierda.setEnabled(false);
                 btnDerecha.setEnabled(false);
                 btnPaso.setEnabled(false);
@@ -299,7 +308,6 @@ public class Main extends javax.swing.JFrame {
     private void btnPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasoActionPerformed
         // TODO add your handling code here:
 
-        
         peticion.paso();
         btnIzquierda.setEnabled(false);
         btnDerecha.setEnabled(false);

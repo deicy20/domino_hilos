@@ -27,6 +27,8 @@ public class Peticion {
 
     Socket conexion;
     JPanel tableroMesa;
+    String miTurno;
+    boolean yaJugo = false;
 
     //esta variable controla cuando comenzar a pedir el turno al servidor, si esta variabel esta en true quiere decir que ya el cliente hizo
     // una jugada valida, de lo contrario permanecera en false para no solicitar mas turnos
@@ -37,7 +39,10 @@ public class Peticion {
 
     public Peticion(Socket socket, JPanel panel) {
         conexion = socket;
+        miTurno = recibirMensaje();
         tableroMesa = panel;
+
+        System.out.println("mi turno: " + miTurno);
     }
 
     public void mandarMensaje(String mensaje) {
@@ -63,7 +68,6 @@ public class Peticion {
         //mandarMensaje("validarNombre");
         while (true) {
             String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
-
             mandarMensaje(nombre);
             String[] mensajeRespuesta = recibirMensaje().split(";");
             System.out.println(mensajeRespuesta[0] + " " + mensajeRespuesta[1]);
@@ -116,44 +120,70 @@ public class Peticion {
         new Thread(() -> {
 
             while (true) {
-                if (controlTurno) {
-                    String[] mens = recibirMensaje().split(";");
-                    if (mens.equals("1")) {
 
-                        JOptionPane.showMessageDialog(frame, mens[1]);
-                        System.exit(1);
-                        break;
+                if (!yaJugo) {
+                    //System.out.println("Esperando turno....");
+                    mandarMensaje(getMiTurno());
+                    String resultado = recibirMensaje();
+                    // System.out.println("respues cliente: "+resultado);
+                    if (resultado.equals("si")) {
+                        yaJugo = true;
+                        if (controlTurno) {
+                            String[] mens = recibirMensaje().split(";");
+                            if (mens.equals("1")) {
+
+                                JOptionPane.showMessageDialog(frame, mens[1]);
+                                System.exit(1);
+                                break;
+                            }
+                            JOptionPane.showMessageDialog(frame, mens[1]);
+                            actualizarTablero();
+                            izquierda.setEnabled(true);
+                            paso.setEnabled(true);
+                            derecha.setEnabled(true);
+                            controlTurno = false;
+
+                        } else {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    } else {
+                        //System.out.println("no aca");
                     }
-                    JOptionPane.showMessageDialog(frame, mens[1]);
-                    actualizarTablero();
-                    izquierda.setEnabled(true);
-                    paso.setEnabled(true);
-                    derecha.setEnabled(true);
-                    controlTurno = false;
-
                 } else {
+
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
+
                 }
+
             }
 
         }).start();
     }
 
     public boolean jugarIzquierda(JPanel panelContenedor, PanelFichaHorizonta panel) {
+
         boolean resultado = false;
         PanelFichaHorizonta pv = panel;
 
         mandarMensaje("jugarIzquierda");
         mandarMensaje(pv.getDerecha() + ";" + pv.getIzquierda());
+        System.out.println("antes deeee 2");
+        String res = recibirMensaje();
 
-        if (recibirMensaje().equals("0")) {
+        System.out.println("antes deeee 3");
+        System.out.println("mensjae de valor izquierdo:" + res);
+        if (res.equals("0")) {
             JOptionPane.showMessageDialog(panel, "Jugada no valida");
         } else {
-
+            yaJugo = false;
             for (Component cp : panelContenedor.getComponents()) {
 
                 if (cp.getName().equals(panel.getName())) {
@@ -182,7 +212,7 @@ public class Peticion {
         if (recibirMensaje().equals("0")) {
             JOptionPane.showMessageDialog(panel, "Jugada no valida");
         } else {
-
+            yaJugo = false;
             for (Component cp : panelContenedor.getComponents()) {
 
                 if (cp.getName().equals(panel.getName())) {
@@ -201,7 +231,7 @@ public class Peticion {
         return resultado;
     }
 
-    public void actualizarTablero() {
+    public synchronized void actualizarTablero() {
         String mensaje = recibirMensaje();
         System.out.println("mensjae -" + mensaje + "-");
         String[] fichasActualizacion = mensaje.split(";");
@@ -228,9 +258,10 @@ public class Peticion {
     public void paso() {
         mandarMensaje("paso");
         controlTurno = true;
+        yaJugo = false;
     }
 
-    public void puntos(JTextArea area) {
+    public synchronized void  puntos(JTextArea area) {
 
         String[] mensaje = recibirMensaje().split("@");
         if (mensaje.length > 2) {
@@ -241,6 +272,10 @@ public class Peticion {
                 area.append("Jugador-> " + datosSeparados[0] + " G: " + datosSeparados[1] + " P: " + datosSeparados[2] + " \n");
             }
         }
+    }
+
+    public synchronized String getMiTurno() {
+        return miTurno;
     }
 
 }
